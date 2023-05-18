@@ -19,6 +19,7 @@ hash_file_path = get_hash_file_path()
 quedasArray = []
 
 # Open the CSV file and read the data into a list of Crash objects
+
 with open("data/QuedasCsv.csv", "r", encoding="utf-8") as file:
     reader = csv.reader(file)
     next(reader)
