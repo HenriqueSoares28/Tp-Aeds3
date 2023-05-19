@@ -12,3 +12,6 @@ def get_invlist1_file_path():
 
 def get_invlist2_file_path():
     return "data/invlist2.bin"
+
+def get_json_file_path():
+    return "data/data.json"

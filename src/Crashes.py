@@ -16,6 +16,16 @@ class Crashes:
     def __str__(self):
         return f"ID: {self.id}\nDate: {self.date}\nTime: {self.time}\nLocation: {self.location}\nOperator: {self.operator}\nFlight: {self.flight}\nRoute: {self.route}\nModel: {self.model}\nAboard: {self.aboard}\nFatalities: {self.fatalities}"
     
+    # Return the object as a String same as __str__ but with a different format
+    def __repr__(self):
+        return f"{self.id}, {self.date}, {self.time}, {self.location}, {self.operator}, {self.flight}, {self.route}, {self.model}, {self.aboard}, {self.fatalities}\n"
+    
+    # Return the object as a Dictionary    
+    def __dict__(self):
+        return {'id': self.id, 'date': self.date, 'time': self.time, 'location': self.location, 'operator': self.operator, 'flight': self.flight, 'route': self.route, 'model': self.model, 'aboard': self.aboard, 'fatalities': self.fatalities}
+    
+        
+        
     # Return the size of the object
     def get_size(self):
         return struct.calcsize('?') + struct.calcsize('i') + struct.calcsize('i') + len(self.date.encode('utf-8')) + struct.calcsize('i') + len(self.time.encode('utf-8')) + struct.calcsize('i') + len(self.location.encode('utf-8')) + struct.calcsize('i') + len(self.operator.encode('utf-8')) + struct.calcsize('i') + len(self.flight.encode('utf-8')) + struct.calcsize('i') + len(self.route.encode('utf-8')) + struct.calcsize('i') + len(self.model.encode('utf-8')) + struct.calcsize('i') + struct.calcsize('i')
