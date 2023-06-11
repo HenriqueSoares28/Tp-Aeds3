@@ -9,6 +9,7 @@ from Crashes import *
 
 from path import *
 file_path = get_file_path()
+csv_file_path = get_csv_file_path()
 index_file_path = get_index_file_path()
 hash_file_path = get_hash_file_path()
 
@@ -18,6 +19,10 @@ from Lzw import LzwEncoder as lzwE
 from Lzw import LzwDecoder as lzwD
 
 from Huffman import huffman as huf
+
+from Kmp import Kmp as kmp
+from Bmh import Bmh as bmh
+
 
 from file_size import get_file_size
 
@@ -155,7 +160,9 @@ def menu(file_path):
     print("11. Decompress file using LZW")
     print("12. Compress file using Huffman")
     print("13. Decompress file using Huffman")
-    print("14. Exit")
+    print("14. Find a pattern using KMP")
+    print("15. Find a pattern using BMH")
+    print("16. Exit")
 
     option = int(input("Enter option number: "))
 
@@ -249,12 +256,17 @@ def menu(file_path):
         id = int(input("Enter crash id to search: "))
         crash = read_crash(decompressFilePath, id)
         print(crash)
-           
-        
-
-        
         
     elif option == 14:
+        key = input("Enter pattern to search using KMP: ")
+        kmp.find_matches(csv_file_path, key)
+    
+    elif option == 15:
+        key = input("Enter pattern to search using BMH: ")
+        bmh.find_matches(csv_file_path, key)
+        
+        
+    elif option == 16:
         exit()
 
     else:

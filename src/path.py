@@ -20,6 +20,8 @@ def get_lzw_decompressed_file_path(): return "data/QuedasCsv_decoded_lzw.bin"
 
 def get_code_book_file_path(): return "data/code_book.json"
 
+def get_csv_file_path(): return "data/QuedasCsv.csv"
+
 
 
 
