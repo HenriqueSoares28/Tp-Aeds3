@@ -14,6 +14,14 @@ hash_file_path = get_hash_file_path()
 
 from iList import search_operator, search_year
 
+from Lzw import LzwEncoder as lzwE
+from Lzw import LzwDecoder as lzwD
+
+from Huffman import huffman as huf
+
+from file_size import get_file_size
+
+
 
     
     
@@ -143,7 +151,11 @@ def menu(file_path):
     print("7. Read an existing crash using hash file")
     print("8. Show all ids determined by a given operator")
     print("9. Show all ids that occur in some year")
-    print("10. Exit")
+    print("10. Compress file using LZW")
+    print("11. Decompress file using LZW")
+    print("12. Compress file using Huffman")
+    print("13. Decompress file using Huffman")
+    print("14. Exit")
 
     option = int(input("Enter option number: "))
 
@@ -193,6 +205,56 @@ def menu(file_path):
         print(search_year(year))
         
     elif option == 10:
+        compressFilePath = get_lzw_compressed_file_path()
+        lzwE.compress_file(file_path, 12)
+        print("File compressed successfully.")
+        print('Normal file size:', get_file_size('data\QuedasCsv.bin'), 'bytes')
+        print('Compressed file size:', get_file_size(compressFilePath), 'bytes')
+        print('Percentage of compression: {:.2f}%'.format(100 - round((get_file_size(compressFilePath)/get_file_size('data\QuedasCsv.bin'))*100, 2)))
+    
+    elif option == 11:
+        compressFile = get_lzw_compressed_file_path()
+        lzwD.decompress_file(compressFile, 12)
+        print("File decompressed successfully.")
+        id = int(input("Enter crash id to search: "))
+        crash = read_crash(file_path, id)
+        print(crash)
+        
+    elif option == 12:
+        compressFilePath = get_huf_compressed_file_path()
+        with open(file_path, 'rb') as f:
+            binary_data = f.read()
+        frequency_dic = huf.calculate_frequency(binary_data)
+        encoding, code_book = huf.create_encoding(frequency_dic, binary_data)
+        output_file = compressFilePath
+        huf.write_binary_encoding(encoding, output_file)
+        print("File compressed successfully.")
+        print('Normal file size:', get_file_size(get_file_path()), 'bytes')
+        print('Compressed file size:', get_file_size(compressFilePath), 'bytes')
+        print('Percentage of compression: {:.2f}%'.format(100 - round((get_file_size(compressFilePath)/get_file_size(get_file_path()))*100, 2)))
+    
+        code_book_file = get_code_book_file_path()
+        huf.write_code_book(code_book, code_book_file)
+    elif option == 13:
+        compressFilePath = get_huf_compressed_file_path()
+        code_book_file = get_code_book_file_path()
+        
+
+        decoded_data = huf.decode_file(code_book_file, compressFilePath)
+        decompressFilePath = get_huf_decompressed_file_path()
+        with open(decompressFilePath, "wb") as file:
+            file.write(decoded_data)
+        print('Decompressed file successfully') 
+        
+        id = int(input("Enter crash id to search: "))
+        crash = read_crash(decompressFilePath, id)
+        print(crash)
+           
+        
+
+        
+        
+    elif option == 14:
         exit()
 
     else:
