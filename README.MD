@@ -7,7 +7,7 @@
 python .\src\main.py
 ```
 
-* [Link para o vídeo](https://sgapucminasbr-my.sharepoint.com/:v:/g/personal/1381325_sga_pucminas_br/ERmzD6w_Ul1Gt2jecfYyDpgB2JKcoVsAG4IAhMsqObiEwA?e=JzGJzc) - Faça login com a conta da puc
+* [Link para o vídeo do TP4](https://youtu.be/ap3HNC1rRks) 
 
 
 
