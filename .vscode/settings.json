@@ -6,5 +6,8 @@
     "python.formatting.provider": "none",
     "cSpell.words": [
         "invlist"
+    ],
+    "cSpell.enableFiletypes": [
+        "!python"
     ]
 }

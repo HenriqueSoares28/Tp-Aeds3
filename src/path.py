@@ -22,6 +22,14 @@ def get_code_book_file_path(): return "data/code_book.json"
 
 def get_csv_file_path(): return "data/QuedasCsv.csv"
 
+def get_aes_key_path(): return "data/aes/aes_encryption_key.key"
+
+def get_aes_encrypted_file_path(): return "data/aes/aes_encrypted.bin"
+
+def get_aes_decrypted_file_path(): return "data/aes/aes_decrypted.bin"
+
+
+
 
 
 

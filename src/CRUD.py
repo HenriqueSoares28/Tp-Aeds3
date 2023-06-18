@@ -12,6 +12,10 @@ file_path = get_file_path()
 csv_file_path = get_csv_file_path()
 index_file_path = get_index_file_path()
 hash_file_path = get_hash_file_path()
+aes_encrypted_file_path = get_aes_encrypted_file_path()
+aes_decrypted_file_path = get_aes_decrypted_file_path()
+aes_key_path = get_aes_key_path()
+
 
 from iList import search_operator, search_year
 
@@ -25,6 +29,9 @@ from Bmh import Bmh as bmh
 
 
 from file_size import get_file_size
+
+from Aes import Aes as aes
+from Aes import keyGen as aesKey
 
 
 
@@ -162,7 +169,11 @@ def menu(file_path):
     print("13. Decompress file using Huffman")
     print("14. Find a pattern using KMP")
     print("15. Find a pattern using BMH")
-    print("16. Exit")
+    print("16. Encrypt file using AES")
+    print("17. Decrypt file using AES")
+    print("18. Encrypt file using RSA")
+    print("19. Decrypt file using RSA")
+    print("20. Exit")
 
     option = int(input("Enter option number: "))
 
@@ -265,8 +276,28 @@ def menu(file_path):
         key = input("Enter pattern to search using BMH: ")
         bmh.find_matches(csv_file_path, key)
         
-        
     elif option == 16:
+        aesKey.generate_key(16, aes_key_path)
+        print("Random key generated successfully at ", aes_key_path)
+        encryption_key = aes.read_key_from_file(aes_key_path)
+        aes.encrypt_file(file_path, encryption_key, aes_encrypted_file_path)
+        print("File encrypted successfully at ", aes_encrypted_file_path)
+    
+    elif option == 17:
+        encryption_key = aes.read_key_from_file(aes_key_path)
+        aes.decrypt_file(aes_encrypted_file_path, encryption_key, aes_decrypted_file_path)
+        print("File decrypted successfully at ", aes_decrypted_file_path)
+    
+    elif option == 18:
+        pass
+    
+    elif option == 19:
+        pass
+
+        
+        
+    
+    elif option == 20:
         exit()
 
     else:
