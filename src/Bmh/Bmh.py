@@ -19,15 +19,15 @@ def bmh_search(pattern, text):
 
     table = compute_bad_match_table(pattern)
 
-    i = m - 1 
-    j = m - 1 
+    i = m - 1
+    j = m - 1
     matches = []
 
     while i < n:
         if pattern[j] == text[i]:
             if j == 0:
                 matches.append(i)
-                i += m  
+                i += m
                 j = m - 1
             else:
                 i -= 1
@@ -58,11 +58,11 @@ def read_csv_file(filename):
     return data
 
 
-def find_matches(csv_data, pattern_to_search):
+def find_matches(csv_file, pattern_to_search):
     """
     Function to find all occurrences of a pattern in a CSV file
     """
-    csv_data = read_csv_file(csv_data)
+    csv_data = read_csv_file(csv_file)
     for row in csv_data:
         text = ','.join(row)  # Concatenate the elements of the row into a string
         matches = bmh_search(pattern_to_search, text)
