@@ -28,8 +28,9 @@ def get_aes_encrypted_file_path(): return "data/aes/aes_encrypted.bin"
 
 def get_aes_decrypted_file_path(): return "data/aes/aes_decrypted.bin"
 
+def get_cc20_key_path(): return "data/cc20/private_key.pem"
 
+def get_cc20_encrypted_file_path(): return "data/cc20/encrypted.bin"
 
-
-
+def get_cc20_decrypted_file_path(): return "data/cc20/decrypted.bin"
 

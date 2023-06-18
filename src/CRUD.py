@@ -12,9 +12,14 @@ file_path = get_file_path()
 csv_file_path = get_csv_file_path()
 index_file_path = get_index_file_path()
 hash_file_path = get_hash_file_path()
+
 aes_encrypted_file_path = get_aes_encrypted_file_path()
 aes_decrypted_file_path = get_aes_decrypted_file_path()
 aes_key_path = get_aes_key_path()
+
+cc20_encrypted_file_path = get_cc20_encrypted_file_path()
+cc20_decrypted_file_path = get_cc20_decrypted_file_path()
+cc20_key_path = get_cc20_key_path()
 
 
 from iList import search_operator, search_year
@@ -33,6 +38,7 @@ from file_size import get_file_size
 from Aes import Aes as aes
 from Aes import keyGen as aesKey
 
+from Cc20 import Cc20 as cc20
 
 
     
@@ -171,8 +177,8 @@ def menu(file_path):
     print("15. Find a pattern using BMH")
     print("16. Encrypt file using AES")
     print("17. Decrypt file using AES")
-    print("18. Encrypt file using RSA")
-    print("19. Decrypt file using RSA")
+    print("18. Encrypt file using CC20")
+    print("19. Decrypt file using CC20")
     print("20. Exit")
 
     option = int(input("Enter option number: "))
@@ -289,14 +295,17 @@ def menu(file_path):
         print("File decrypted successfully at ", aes_decrypted_file_path)
     
     elif option == 18:
-        pass
-    
+        cc20.generateKey(cc20_key_path)
+        print("Random key generated successfully at ", cc20_key_path)
+        encryption_key = cc20.read_key_from_file(cc20_key_path)
+        cc20.encrypt_file(file_path, encryption_key, cc20_encrypted_file_path)
+        print("File encrypted successfully at ", cc20_encrypted_file_path)
+        
     elif option == 19:
-        pass
+        encryption_key = cc20.read_key_from_file(cc20_key_path)
+        cc20.decrypt_file(cc20_encrypted_file_path, encryption_key, cc20_decrypted_file_path)
+        print("File decrypted successfully at ", cc20_decrypted_file_path)
 
-        
-        
-    
     elif option == 20:
         exit()
 
